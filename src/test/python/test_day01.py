@@ -12,7 +12,7 @@ def test_part_1_example():
                                   f'day{day}-example.data')
     solver = Solver()
     answer = solver.part_1(data_file_path)
-    assert answer == 24000
+    assert answer == 142
 
 
 def test_part_2_example():
@@ -20,7 +20,7 @@ def test_part_2_example():
                                   f'day{day}-example.data')
     solver = Solver()
     answer = solver.part_2(data_file_path)
-    assert answer == 45000
+    assert answer == 0
 
 
 def test_part_1():
@@ -28,7 +28,7 @@ def test_part_1():
                                   f'day{day}.data')
     solver = Solver()
     answer = solver.part_1(data_file_path)
-    assert answer == 69289
+    assert answer == 55208
 
 
 def test_part_2():
@@ -36,4 +36,4 @@ def test_part_2():
                                   f'day{day}.data')
     solver = Solver()
     answer = solver.part_2(data_file_path)
-    assert answer == 205615
+    assert answer == 0

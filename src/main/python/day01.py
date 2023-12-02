@@ -1,27 +1,14 @@
 #!/usr/bin/env python3
 """
-Day 1: Calorie Counting.
+Day 1: Tebuchet?!
 
-https://adventofcode.com/2022/day/1
+https://adventofcode.com/2023/day/1
 """
 import os
-from dataclasses import dataclass
+import re
 from typing import Any
 
 from src.main.python.util import AbstractSolver
-
-
-@dataclass
-class Item:
-    calories: int
-
-
-@dataclass
-class Elf:
-    items: list[Item]
-
-    def total_calories(self) -> int:
-        return sum(x.calories for x in self.items)
 
 
 class Solver(AbstractSolver):
@@ -29,27 +16,20 @@ class Solver(AbstractSolver):
         super().__init__()
 
     def init_data(self, data_file_path: str = None) -> Any:
-        data = self.get_data(self.get_day(), data_file_path)
-        elves = []
-        items = []
-        for line in data:
-            if not line:
-                elves.append(Elf(items))
-                items = []
-                continue
-            items.append(Item(int(line)))
-
-        elves.append(Elf(items))
-
-        return elves
+        return self.get_data(self.get_day(), data_file_path)
 
     def solve_part_1(self, data: list[Any]) -> Any:
-        data.sort(reverse=True, key=lambda x: x.total_calories())
-        return data[0].total_calories()
+        answer = 0
+        pattern = re.compile(r'\d')
+        for line in data:
+            matches = pattern.findall(line)
+            if matches:
+                value = int(str(matches[0]) + str(matches[-1]))
+                answer += value
+        return answer
 
     def solve_part_2(self, data: list[Any]) -> Any:
-        data.sort(reverse=True, key=lambda x: x.total_calories())
-        return sum(x.total_calories() for x in data[:3])
+        return 2
 
     def get_day(self) -> str:
         return os.path.basename(__file__)[3:5]
