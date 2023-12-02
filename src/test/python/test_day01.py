@@ -36,4 +36,4 @@ def test_part_2():
                                   f'day{day}.data')
     solver = Solver()
     answer = solver.part_2(data_file_path)
-    assert answer == 0
+    assert answer == 54578

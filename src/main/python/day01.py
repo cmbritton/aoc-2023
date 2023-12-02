@@ -10,20 +10,35 @@ from typing import Any
 
 from src.main.python.util import AbstractSolver
 
-DIGIT_NAMES = {
-        'zero':  '0',
-        'one':   '1',
-        'two':   '2',
-        'three': '3',
-        'four':  '4',
-        'five':  '5',
-        'six':   '6',
-        'seven': '7',
-        'eight': '8',
-        'nine':  '9'
+DIGIT_MAP = {
+        '0':     0,
+        'zero':  0,
+        '1':     1,
+        'one':   1,
+        '2':     2,
+        'two':   2,
+        '3':     3,
+        'three': 3,
+        '4':     4,
+        'four':  4,
+        '5':     5,
+        'five':  5,
+        '6':     6,
+        'six':   6,
+        '7':     7,
+        'seven': 7,
+        '8':     8,
+        'eight': 8,
+        '9':     9,
+        'nine':  9
 }
 
 PATTERN = re.compile(r'\d')
+
+FIRST_DIGIT_PATTERN = re.compile(
+        r'(\d|zero|one|two|three|four|five|six|seven|eight|nine).*')
+LAST_DIGIT_PATTERN = re.compile(
+        r'.*(\d|zero|one|two|three|four|five|six|seven|eight|nine)')
 
 
 class Solver(AbstractSolver):
@@ -34,34 +49,34 @@ class Solver(AbstractSolver):
         return self.get_data(self.get_day(), data_file_path)
 
     @staticmethod
+    def find_first_digit(line: str) -> int:
+        return DIGIT_MAP[FIRST_DIGIT_PATTERN.findall(line)[0]]
+
+    @staticmethod
+    def find_last_digit(line: str) -> int:
+        return DIGIT_MAP[LAST_DIGIT_PATTERN.findall(line)[0]]
+
+    def line_to_value_part2(self, line: str) -> int:
+        return self.find_first_digit(line) * 10 + self.find_last_digit(line)
+
+    @staticmethod
     def line_to_value(line: str) -> int:
         matches = PATTERN.findall(line)
         if matches:
-            value = int(str(matches[0]) + str(matches[-1]))
-            print(f'line: {line}')
-            print(f'value: {value}\n')
-            return value
+            return int(str(matches[0]) + str(matches[-1]))
         else:
             raise Exception(f'No match, line={line}')
 
     def solve_part_1(self, data: list[Any]) -> Any:
         answer = 0
-        # for line in data:
-        #     answer += self.line_to_value(line)
+        for line in data:
+            answer += self.line_to_value(line)
         return answer
-
-    # 54571 is too low
 
     def solve_part_2(self, data: list[Any]) -> Any:
         answer = 0
         for line in data:
-            it = re.finditer(
-                    r'(one|two|three|four|five|six|seven|eight|nine|zero)',
-                    line)
-            for digit_name in it:
-                line = line.replace(digit_name.group(1),
-                                    DIGIT_NAMES[digit_name.group(1)])
-            answer += self.line_to_value(line)
+            answer += self.line_to_value_part2(line)
         return answer
 
     def get_day(self) -> str:

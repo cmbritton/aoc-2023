@@ -68,7 +68,7 @@ No answers here! Just elapsed times for each puzzle solution.
 
 | Puzzle                                                | Part 1 Elapsed Time | Part 2 Elapsed Time |
 |-------------------------------------------------------|--------------------:|--------------------:|
-| [Day 1: Trebuchet?!](https://adventofcode.com/2023/1) | 735.20 microseconds |            Unsolved |
+| [Day 1: Trebuchet?!](https://adventofcode.com/2023/1) | 735.20 microseconds |   1.44 milliseconds |
 | Day  2: Unavailable                                   |            Unsolved |            Unsolved |
 | Day  3: Unavailable                                   |            Unsolved |            Unsolved |
 | Day  4: Unavailable                                   |            Unsolved |            Unsolved |
