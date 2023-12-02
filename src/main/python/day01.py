@@ -33,7 +33,8 @@ class Solver(AbstractSolver):
     def init_data(self, data_file_path: str = None) -> Any:
         return self.get_data(self.get_day(), data_file_path)
 
-    def line_to_value(self, line: str) -> int:
+    @staticmethod
+    def line_to_value(line: str) -> int:
         matches = PATTERN.findall(line)
         if matches:
             value = int(str(matches[0]) + str(matches[-1]))
@@ -45,20 +46,22 @@ class Solver(AbstractSolver):
 
     def solve_part_1(self, data: list[Any]) -> Any:
         answer = 0
-        for line in data:
-            answer += self.line_to_value(line)
+        # for line in data:
+        #     answer += self.line_to_value(line)
         return answer
 
-# 54571 is too low
+    # 54571 is too low
 
     def solve_part_2(self, data: list[Any]) -> Any:
         answer = 0
         for line in data:
-            new_line = line
-            it = re.finditer(r'(one|two|three|four|five|six|seven|eight|nine|zero)', new_line)
+            it = re.finditer(
+                    r'(one|two|three|four|five|six|seven|eight|nine|zero)',
+                    line)
             for digit_name in it:
-                new_line = new_line.replace(digit_name.group(1), DIGIT_NAMES[digit_name.group(1)])
-            answer += self.line_to_value(new_line)
+                line = line.replace(digit_name.group(1),
+                                    DIGIT_NAMES[digit_name.group(1)])
+            answer += self.line_to_value(line)
         return answer
 
     def get_day(self) -> str:
