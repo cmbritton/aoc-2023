@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os.path
 
-from src.main.python.day03 import Solver
+from src.main.python.day04 import Solver
 
 
 day = os.path.basename(__file__)[8:10]
@@ -12,7 +12,7 @@ def test_part_1_example():
                                   f'day{day}-example.data')
     solver = Solver()
     answer = solver.part_1(data_file_path)
-    assert answer == 4361
+    assert answer == 13
 
 
 def test_part_2_example():
@@ -20,7 +20,7 @@ def test_part_2_example():
                                   f'day{day}-example.data')
     solver = Solver()
     answer = solver.part_2(data_file_path)
-    assert answer == 467835
+    assert answer == -1
 
 
 def test_part_1():
@@ -28,7 +28,7 @@ def test_part_1():
                                   f'day{day}.data')
     solver = Solver()
     answer = solver.part_1(data_file_path)
-    assert answer == 538046
+    assert answer == -1
 
 
 def test_part_2():
@@ -36,4 +36,4 @@ def test_part_2():
                                   f'day{day}.data')
     solver = Solver()
     answer = solver.part_2(data_file_path)
-    assert answer == 81709807
+    assert answer == -1
