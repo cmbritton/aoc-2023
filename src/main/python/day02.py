@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Day 1: Tebuchet?!
+Day 2: Cube Conundrum
 
-https://adventofcode.com/2023/day/1
+https://adventofcode.com/2023/day/2
 """
 import os
 from collections import defaultdict

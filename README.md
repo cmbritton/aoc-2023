@@ -70,7 +70,7 @@ No answers here! Just elapsed times for each puzzle solution.
 |-----------------------------------------------------------|--------------------:|--------------------:|
 | [Day 1: Trebuchet?!](https://adventofcode.com/2023/1)     | 735.20 microseconds |   1.44 milliseconds |
 | [Day  2: Cube Conundrum](https://adventofcode.com/2023/2) | 968.80 microseconds |   1.07 milliseconds |
-| Day  3: Unavailable                                       |            Unsolved |            Unsolved |
+| [Day  3: Gear Ratios](https://adventofcode.com/2023/3)    |   3.59 milliseconds |            Unsolved |
 | Day  4: Unavailable                                       |            Unsolved |            Unsolved |
 | Day  5: Unavailable                                       |            Unsolved |            Unsolved |
 | Day  6: Unavailable                                       |            Unsolved |            Unsolved |
