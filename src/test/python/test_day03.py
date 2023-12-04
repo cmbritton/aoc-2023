@@ -20,7 +20,7 @@ def test_part_2_example():
                                   f'day{day}-example.data')
     solver = Solver()
     answer = solver.part_2(data_file_path)
-    assert answer == -1
+    assert answer == 467835
 
 
 def test_part_1():
