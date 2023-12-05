@@ -37,8 +37,7 @@ class Solver(AbstractSolver):
             cube_counts[cube_color] = int(cube_count)
         return GameRound(cube_counts)
 
-    def parse_game_rounds(self, game_rounds_data: list[str]) -> list[
-        GameRound]:
+    def parse_game_rounds(self, game_rounds_data: list[str]) -> list[GameRound]:
         game_rounds = []
         for game_round_data in game_rounds_data:
             game_rounds.append(self.parse_game_round(game_round_data))

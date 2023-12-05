@@ -22,13 +22,27 @@ class State(Enum):
     HUMIDITY_TO_LOCATION = auto()
 
 
+STATE_MAP = {
+        'seeds':                       State.SEEDS,
+        'seed-to-soil map':            State.SEED_TO_SOIL,
+        'soil-to-fertilizer map':      State.SOIL_TO_FERTILIZER,
+        'fertilizer-to-water map':     State.FERTILIZER_TO_WATER,
+        'water-to-light map':          State.WATER_TO_LIGHT,
+        'light-to-temperature map':    State.LIGHT_TO_TEMP,
+        'temperature-to-humidity map': State.TEMP_TO_HUMIDITY,
+        'humidity-to-location map':    State.HUMIDITY_TO_LOCATION
+}
+
+
 class ValueMap:
     def __init__(self) -> None:
         super().__init__()
         self.name = None
         self.data = []
 
-    def apply(self, map_data: tuple[int, int, int], value: int) -> tuple[bool, int]:
+    @staticmethod
+    def apply(map_data: tuple[int, int, int], value: int) \
+            -> tuple[bool, int]:
         if map_data[1] <= value <= map_data[1] + map_data[2]:
             return True, value - map_data[1] + map_data[0]
         return False, value
@@ -50,11 +64,10 @@ class Almanac:
 
     def map_seed(self, seed: int) -> int:
         result = seed
-        # print(f'\nseed = {result}')
         for value_map in self.value_maps:
             result = value_map.map_value(result)
-            # print(f'{value_map.name} result = {result}')
         return result
+
 
 class Solver(AbstractSolver):
     def __init__(self) -> None:
@@ -62,25 +75,11 @@ class Solver(AbstractSolver):
         self.almanac = Almanac()
 
     @staticmethod
-    def state_from_line(line: str, prev_state: State) -> State:
-        state = prev_state
-        if line.startswith('seeds:'):
-            state = State.SEEDS
-        elif line.startswith('seed-to-soil map:'):
-            state = State.SEED_TO_SOIL
-        elif line.startswith('soil-to-fertilizer map:'):
-            state = State.SOIL_TO_FERTILIZER
-        elif line.startswith('fertilizer-to-water map:'):
-            state = State.FERTILIZER_TO_WATER
-        elif line.startswith('water-to-light map:'):
-            state = State.WATER_TO_LIGHT
-        elif line.startswith('light-to-temperature map:'):
-            state = State.LIGHT_TO_TEMP
-        elif line.startswith('temperature-to-humidity map:'):
-            state = State.TEMP_TO_HUMIDITY
-        elif line.startswith('humidity-to-location map:'):
-            state = State.HUMIDITY_TO_LOCATION
-
+    def state_from_line(line: str, state: State) -> State:
+        if ':' in line:
+            state_label = line.strip().split(':', maxsplit=1)[0]
+            if state_label in STATE_MAP:
+                return STATE_MAP[state_label]
         return state
 
     def init_data(self, data_file_path: str = None) -> Any:
