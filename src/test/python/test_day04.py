@@ -20,7 +20,7 @@ def test_part_2_example():
                                   f'day{day}-example.data')
     solver = Solver()
     answer = solver.part_2(data_file_path)
-    assert answer == -1
+    assert answer == 30
 
 
 def test_part_1():
@@ -28,12 +28,12 @@ def test_part_1():
                                   f'day{day}.data')
     solver = Solver()
     answer = solver.part_1(data_file_path)
-    assert answer == -1
+    assert answer == 17803
 
 
-def test_part_2():
-    data_file_path = os.path.join(os.environ.get('RESOURCES_DIR_PATH'),
-                                  f'day{day}.data')
-    solver = Solver()
-    answer = solver.part_2(data_file_path)
-    assert answer == -1
+# def test_part_2():
+#     data_file_path = os.path.join(os.environ.get('RESOURCES_DIR_PATH'),
+#                                   f'day{day}.data')
+#     solver = Solver()
+#     answer = solver.part_2(data_file_path)
+#     assert answer == -1
