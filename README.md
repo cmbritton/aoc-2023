@@ -66,30 +66,30 @@ feature that I was not familiar with enough to use in my initial solution.
 
 No answers here! Just elapsed times for each puzzle solution.
 
-| Puzzle                                                    | Part 1 Elapsed Time | Part 2 Elapsed Time |
-|-----------------------------------------------------------|--------------------:|--------------------:|
-| [Day 1: Trebuchet?!](https://adventofcode.com/2023/1)     | 735.20 microseconds |   1.44 milliseconds |
-| [Day  2: Cube Conundrum](https://adventofcode.com/2023/2) | 968.80 microseconds |   1.07 milliseconds |
-| [Day  3: Gear Ratios](https://adventofcode.com/2023/3)    |   3.59 milliseconds |  19.29 milliseconds |
-| [Day  4: Scratchcards](https://adventofcode.com/2023/4)   |   1.62 milliseconds |            Unsolved |
-| Day  5: Unavailable                                       |            Unsolved |            Unsolved |
-| Day  6: Unavailable                                       |            Unsolved |            Unsolved |
-| Day  7: Unavailable                                       |            Unsolved |            Unsolved |
-| Day  8: Unavailable                                       |            Unsolved |            Unsolved |
-| Day  9: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 10: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 11: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 12: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 13: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 14: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 15: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 16: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 17: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 18: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 19: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 20: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 21: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 22: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 23: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 24: Unavailable                                       |            Unsolved |            Unsolved |
-| Day 25: Unavailable                                       |            Unsolved |            Unsolved |
+| Puzzle                                                                     | Part 1 Elapsed Time | Part 2 Elapsed Time |
+|----------------------------------------------------------------------------|--------------------:|--------------------:|
+| [Day 1: Trebuchet?!](https://adventofcode.com/2023/1)                      | 735.20 microseconds |   1.44 milliseconds |
+| [Day  2: Cube Conundrum](https://adventofcode.com/2023/2)                  | 968.80 microseconds |   1.07 milliseconds |
+| [Day  3: Gear Ratios](https://adventofcode.com/2023/3)                     |   3.59 milliseconds |  19.29 milliseconds |
+| [Day  4: Scratchcards](https://adventofcode.com/2023/4)                    |   1.62 milliseconds |            Unsolved |
+| [Day  5: If You Give A Seed A Fertilizer](https://adventofcode.com/2023/5) | 605.70 microseconds |            Unsolved |
+| Day  6: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day  7: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day  8: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day  9: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 10: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 11: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 12: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 13: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 14: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 15: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 16: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 17: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 18: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 19: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 20: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 21: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 22: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 23: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 24: Unavailable                                                        |            Unsolved |            Unsolved |
+| Day 25: Unavailable                                                        |            Unsolved |            Unsolved |
