@@ -5,118 +5,85 @@ Day 5: If You Give A Seed A Fertilizer
 https://adventofcode.com/2023/day/5
 """
 import os
-from enum import auto, Enum
+from collections import namedtuple
+from functools import cache
+from itertools import repeat, count
 from typing import Any
 
 from src.main.python.util import AbstractSolver
 
-
-class State(Enum):
-    SEEDS = auto()
-    SEED_TO_SOIL = auto()
-    SOIL_TO_FERTILIZER = auto()
-    FERTILIZER_TO_WATER = auto()
-    WATER_TO_LIGHT = auto()
-    LIGHT_TO_TEMP = auto()
-    TEMP_TO_HUMIDITY = auto()
-    HUMIDITY_TO_LOCATION = auto()
+Rule = namedtuple('Rule', ['dst', 'src', 'size'])
 
 
-STATE_MAP = {
-        'seeds':                       State.SEEDS,
-        'seed-to-soil map':            State.SEED_TO_SOIL,
-        'soil-to-fertilizer map':      State.SOIL_TO_FERTILIZER,
-        'fertilizer-to-water map':     State.FERTILIZER_TO_WATER,
-        'water-to-light map':          State.WATER_TO_LIGHT,
-        'light-to-temperature map':    State.LIGHT_TO_TEMP,
-        'temperature-to-humidity map': State.TEMP_TO_HUMIDITY,
-        'humidity-to-location map':    State.HUMIDITY_TO_LOCATION
-}
-
-
-class ValueMap:
-    def __init__(self) -> None:
-        super().__init__()
-        self.name = None
-        self.data = []
-
-    @staticmethod
-    def apply(map_data: tuple[int, int, int], value: int) \
-            -> tuple[bool, int]:
-        if map_data[1] <= value <= map_data[1] + map_data[2]:
-            return True, value - map_data[1] + map_data[0]
-        return False, value
-
-    def map_value(self, value: int) -> int:
-        result = value
-        for map_data in self.data:
-            rule_applied, result = self.apply(map_data, result)
-            if rule_applied:
-                break
-        return result
-
-
-class Almanac:
-    def __init__(self) -> None:
-        super().__init__()
-        self.seeds = None
-        self.value_maps = []
-
-    def map_seed(self, seed: int) -> int:
-        result = seed
-        for value_map in self.value_maps:
-            result = value_map.map_value(result)
-        return result
-
+def my_range(start, size):
+    value = start
+    while value < value + size:
+        yield value
+        value += 1
 
 class Solver(AbstractSolver):
     def __init__(self) -> None:
         super().__init__()
-        self.almanac = Almanac()
+        self.seeds = None
+        self.rule_sets = []
 
-    @staticmethod
-    def state_from_line(line: str, state: State) -> State:
-        if ':' in line:
-            state_label = line.strip().split(':', maxsplit=1)[0]
-            if state_label in STATE_MAP:
-                return STATE_MAP[state_label]
-        return state
+    def apply_rule_set(self, rule_set: list[Rule], value: int) -> int:
+        result = value
+        for rule in rule_set:
+            if rule.src <= value < rule.src + rule.size:
+                return (value - rule.src) + rule.dst
+        return result
+
+    def apply_rule_sets(self, value: int) -> int:
+        result = value
+        for rule_set in self.rule_sets:
+            result = self.apply_rule_set(rule_set, result)
+        return result
+
+    @cache
+    def process_seed_list(self, seed: int, size: int) -> int:
+        print(f'Processing {size} seeds starting with {seed}')
+        # return min(list(map(self.apply_rule_sets, count(seed, size))))
+
+        result = 999999999999999
+        value = seed
+        i = 0
+        while value < seed + size:
+            if (i % 1000000) == 0:
+                print(f'{i}')
+            result = min(result, self.apply_rule_sets(value))
+            value += 1
+            i += 1
+        return result
 
     def init_data(self, data_file_path: str = None) -> Any:
         data = self.get_data(self.get_day(), data_file_path)
-        state = None
-        value_map = None
+        rule_set = None
         for line in data:
-            if line.strip() == '':
+            line = line.strip()
+            if line == '' in line:
                 continue
-            prev_state = state
-            state = self.state_from_line(line, state)
-            if state != prev_state:
-                if State.SEEDS == state:
-                    _, seeds = line.split(': ')
-                    self.almanac.seeds = tuple(map(int, seeds.strip().split()))
-                else:
-                    if value_map is not None:
-                        self.almanac.value_maps.append(value_map)
-                    value_map = ValueMap()
-                    value_map.name = state.name
+            elif line.startswith('seeds'):
+                _, seeds = line.split(': ')
+                self.seeds = tuple(map(int, seeds.strip().split()))
                 continue
-            value_map.data.append(tuple(map(int, line.strip().split())))
-        self.almanac.value_maps.append(value_map)
+            elif 'map:' in line:
+                if rule_set is not None:
+                    self.rule_sets.append(rule_set)
+                rule_set = []
+                continue
+            rule_set.append(Rule(*map(int, line.strip().split())))
+        if rule_set:
+            self.rule_sets.append(rule_set)
 
         return data
 
     def solve_part_1(self, data: list[Any]) -> Any:
-        answer = -1
-        for seed in self.almanac.seeds:
-            x = self.almanac.map_seed(seed)
-            if x < answer or -1 == answer:
-                answer = x
-        return answer
+        return min(list(map(self.process_seed_list, self.seeds, repeat(1))))
 
     def solve_part_2(self, data: list[Any]) -> Any:
-        answer = 0
-        return answer
+        return min(list(
+            map(self.process_seed_list, self.seeds[0::2], self.seeds[1::2])))
 
     def get_day(self) -> str:
         return os.path.basename(__file__)[3:5]
