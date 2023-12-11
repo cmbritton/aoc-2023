@@ -6,7 +6,7 @@ https://adventofcode.com/2023/day/5
 """
 import os
 from collections import namedtuple
-from functools import cache
+from functools import cache, reduce
 from itertools import repeat, count
 from typing import Any
 
@@ -20,6 +20,7 @@ def my_range(start, size):
     while value < value + size:
         yield value
         value += 1
+
 
 class Solver(AbstractSolver):
     def __init__(self) -> None:
@@ -40,20 +41,15 @@ class Solver(AbstractSolver):
             result = self.apply_rule_set(rule_set, result)
         return result
 
-    @cache
     def process_seed_list(self, seed: int, size: int) -> int:
-        print(f'Processing {size} seeds starting with {seed}')
+        # print(f'Processing {size} seeds starting with {seed}')
         # return min(list(map(self.apply_rule_sets, count(seed, size))))
 
-        result = 999999999999999
+        result = float('inf')
         value = seed
-        i = 0
         while value < seed + size:
-            if (i % 1000000) == 0:
-                print(f'{i}')
             result = min(result, self.apply_rule_sets(value))
             value += 1
-            i += 1
         return result
 
     def init_data(self, data_file_path: str = None) -> Any:
@@ -79,11 +75,13 @@ class Solver(AbstractSolver):
         return data
 
     def solve_part_1(self, data: list[Any]) -> Any:
-        return min(list(map(self.process_seed_list, self.seeds, repeat(1))))
+        return reduce(lambda x, y: min(x, y), map(self.process_seed_list, self.seeds, repeat(1)))
 
     def solve_part_2(self, data: list[Any]) -> Any:
-        return min(list(
-            map(self.process_seed_list, self.seeds[0::2], self.seeds[1::2])))
+        return reduce(lambda x, y: min(x, y), map(self.process_seed_list, self.seeds[0::2], self.seeds[1::2]))
+        # l = list(
+        #     map(self.process_seed_list, self.seeds[0::2], self.seeds[1::2]))
+        # return min(l)
 
     def get_day(self) -> str:
         return os.path.basename(__file__)[3:5]
