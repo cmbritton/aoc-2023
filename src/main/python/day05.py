@@ -4,12 +4,10 @@ Day 5: If You Give A Seed A Fertilizer
 
 https://adventofcode.com/2023/day/5
 """
-import os
 from collections import namedtuple
-from functools import cache, reduce
-from itertools import repeat, count
+from functools import reduce
+from itertools import repeat
 from typing import Any
-import sys
 
 from src.main.python.util import AbstractSolver
 
@@ -76,10 +74,13 @@ class Solver(AbstractSolver):
         return data
 
     def solve_part_1(self, data: list[Any]) -> Any:
-        return reduce(lambda x, y: min(x, y), map(self.process_seed_list, self.seeds, repeat(1)))
+        return reduce(lambda x, y: min(x, y),
+                      map(self.process_seed_list, self.seeds, repeat(1)))
 
     def solve_part_2(self, data: list[Any]) -> Any:
-        return reduce(lambda x, y: min(x, y), map(self.process_seed_list, self.seeds[0::2], self.seeds[1::2]))
+        return reduce(lambda x, y: min(x, y),
+                      map(self.process_seed_list, self.seeds[0::2],
+                          self.seeds[1::2]))
         # l = list(
         #     map(self.process_seed_list, self.seeds[0::2], self.seeds[1::2]))
         # return min(l)

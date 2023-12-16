@@ -37,4 +37,3 @@ def test_part_2():
     solver = Solver()
     answer = solver.part_2(data_file_path)
     assert answer == -1
-

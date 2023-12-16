@@ -4,7 +4,6 @@ Day 3: Gear Ratios
 
 https://adventofcode.com/2023/day/3
 """
-import os
 import re
 from typing import Any
 
@@ -89,13 +88,21 @@ class Schematic:
         return len(self.data) - 1
 
     def is_part_number(self, part_number: PartNumber) -> bool:
-        min_x = part_number.start_x - 1 if part_number.start_x > 0 else 0
-        width = self.get_max_x()
-        max_x = part_number.end_x + 1 if part_number.end_x < width else width
-        min_y = part_number.y - 1 if part_number.y > 0 else 0
-        height = self.get_max_y()
-        max_y = part_number.y + 1 if part_number.y < height else height
+        min_x, max_x, min_y, max_y = self.get_part_number_coords(part_number)
         return self.is_adjacent(min_x, max_x, min_y, max_y)
+
+    def get_part_number_coords(self, part_number: PartNumber):
+        return self.get_coords(part_number.start_x, part_number.end_x,
+                               part_number.y)
+
+    def get_coords(self, x1: int, x2: int, y: int):
+        min_x = x1 - 1 if x1 > 0 else 0
+        width = self.get_max_x()
+        max_x = x2 + 1 if x2 < width else width
+        min_y = y - 1 if y > 0 else 0
+        height = self.get_max_y()
+        max_y = y + 1 if y < height else height
+        return min_x, max_x, min_y, max_y
 
     def find_adjacent_parts(self, x: int, y: int) -> set[PartNumber]:
         part_numbers = set()
@@ -109,12 +116,9 @@ class Schematic:
 
     def find_parts_for_gear(self, potential_gear: Gear) -> set[PartNumber]:
         part_numbers = set()
-        min_x = potential_gear.x - 1 if potential_gear.x > 0 else 0
-        width = self.get_max_x()
-        max_x = potential_gear.x + 1 if potential_gear.x < width else width
-        min_y = potential_gear.y - 1 if potential_gear.y > 0 else 0
-        height = self.get_max_y()
-        max_y = potential_gear.y + 1 if potential_gear.y < height else height
+        min_x, max_x, min_y, max_y = self.get_coords(potential_gear.x,
+                                                     potential_gear.x,
+                                                     potential_gear.y)
         for x in range(min_x, max_x + 1):
             for y in range(min_y, max_y + 1):
                 part_numbers.update(self.find_adjacent_parts(x, y))
@@ -142,8 +146,7 @@ class Solver(AbstractSolver):
         super().__init__()
         self.schematic = None
 
-    def init_data(self, data_file_path: str = None) -> Any:
-        data = self.get_data(self.get_day(), data_file_path)
+    def init_data(self, data: list[str]) -> None:
         self.schematic = Schematic()
         self.schematic.data = data
         part_numbers = set()
@@ -154,9 +157,9 @@ class Solver(AbstractSolver):
                                                           y, int(m.group(1)))
                 part_numbers.add(part_number)
         self.schematic.part_numbers = list(part_numbers)
-        return data
 
     def solve_part_1(self, data: list[Any]) -> Any:
+        self.init_data(data)
         answer = 0
         for part_number in self.schematic.part_numbers:
             if self.schematic.is_part_number(part_number):
@@ -164,6 +167,7 @@ class Solver(AbstractSolver):
         return answer
 
     def solve_part_2(self, data: list[Any]) -> Any:
+        self.init_data(data)
         answer = 0
         gears = self.schematic.find_gears()
         for gear in gears:

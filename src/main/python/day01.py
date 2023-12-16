@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
-Day 1: Tebuchet?!
+Day 1: Trebuchet?!
 
 https://adventofcode.com/2023/day/1
 """
-import os
 import re
 from typing import Any
 
@@ -45,9 +44,6 @@ class Solver(AbstractSolver):
     def __init__(self) -> None:
         super().__init__()
 
-    def init_data(self, data_file_path: str = None) -> Any:
-        return self.get_data(self.get_day(), data_file_path)
-
     @staticmethod
     def find_first_digit(line: str) -> int:
         return DIGIT_MAP[FIRST_DIGIT_PATTERN.findall(line)[0]]
@@ -67,13 +63,13 @@ class Solver(AbstractSolver):
         else:
             raise Exception(f'No match, line={line}')
 
-    def solve_part_1(self, data: list[Any]) -> Any:
+    def solve_part_1(self, data: list[str]) -> Any:
         answer = 0
         for line in data:
             answer += self.line_to_value(line)
         return answer
 
-    def solve_part_2(self, data: list[Any]) -> Any:
+    def solve_part_2(self, data: list[str]) -> Any:
         answer = 0
         for line in data:
             answer += self.line_to_value_part2(line)

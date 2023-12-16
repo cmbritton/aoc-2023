@@ -4,7 +4,6 @@ Day 4: Scratchcards
 
 https://adventofcode.com/2023/day/4
 """
-import os
 import sys
 from typing import Any
 
@@ -38,11 +37,10 @@ class Card:
 class Solver(AbstractSolver):
     def __init__(self) -> None:
         super().__init__()
-        self.data = None
+        self.cards = None
 
-    def init_data(self, data_file_path: str = None) -> Any:
-        cards = []
-        data = self.get_data(self.get_day(), data_file_path)
+    def init_data(self, data: list[str]) -> None:
+        self.cards = []
         for line in data:
             label, rest = line.split(':')
             winning_numbers_str, my_numbers_str = rest.strip().split('|')
@@ -50,30 +48,30 @@ class Solver(AbstractSolver):
             winning_numbers = [int(x.strip()) for x in winning_numbers_list]
             my_numbers_list = my_numbers_str.strip().split()
             my_numbers = [int(x.strip()) for x in my_numbers_list]
-            cards.append(Card.make_card(label, my_numbers, winning_numbers))
-
-        self.data = cards
-        return cards
+            self.cards.append(
+                Card.make_card(label, my_numbers, winning_numbers))
 
     def add_winnings(self, index: int, winning_count: int) -> int:
         score = 0
         if winning_count > 0:
-            for card in self.data[index + 1:index + winning_count]:
+            for card in self.cards[index + 1:index + winning_count]:
                 score += self.add_winnings(index + 1, card.winning_count())
         score += winning_count
         return score
 
-    def solve_part_1(self, data: list[Any]) -> Any:
+    def solve_part_1(self, data: list[str]) -> Any:
+        self.init_data(data)
         answer = 0
-        for card in data:
+        for card in self.cards:
             winning_count = card.winning_count()
             if winning_count > 0:
                 answer += 2 ** (winning_count - 1)
         return answer
 
-    def solve_part_2(self, data: list[Any]) -> Any:
+    def solve_part_2(self, data: list[str]) -> Any:
+        self.init_data(data)
         answer = len(data)
-        for index, card in enumerate(data):
+        for index, card in enumerate(self.cards):
             winning_count = card.winning_count()
             if winning_count > 0:
                 answer += self.add_winnings(index, winning_count)

@@ -1,9 +1,10 @@
 import os
+import re
+import sys
 import time
 from abc import abstractmethod, ABC
 from typing import Any
-import sys
-import re
+
 
 class Timer:
     """
@@ -55,10 +56,6 @@ class AbstractSolver(ABC):
         self.data = None
 
     @abstractmethod
-    def init_data(self, data_file_path: str = None) -> Any:
-        pass
-
-    @abstractmethod
     def solve_part_1(self, data: Any) -> Any:
         pass
 
@@ -66,13 +63,13 @@ class AbstractSolver(ABC):
     def solve_part_2(self, data: Any) -> Any:
         pass
 
-    # @abstractmethod
     def get_day(self):
         return re.search(r'day(\d\d)', sys.argv[-1]).group(1)
 
     def part_1(self, data_file_path: str = None) -> Any:
         timer = Timer()
-        answer = self.solve_part_1(self.init_data(data_file_path))
+        answer = self.solve_part_1(
+            self.get_data(self.get_day(), data_file_path))
         timer.stop()
 
         self.print_info(part='Part 1', timer=timer, answer=answer)
@@ -81,7 +78,8 @@ class AbstractSolver(ABC):
 
     def part_2(self, data_file_path: str = None) -> Any:
         timer = Timer()
-        answer = self.solve_part_2(self.init_data(data_file_path))
+        answer = self.solve_part_2(
+            self.get_data(self.get_day(), data_file_path))
         timer.stop()
 
         self.print_info(part='Part 2', timer=timer, answer=answer)
