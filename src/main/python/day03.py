@@ -171,9 +171,6 @@ class Solver(AbstractSolver):
             answer += parts[0].value * parts[1].value
         return answer
 
-    def get_day(self) -> str:
-        return os.path.basename(__file__)[3:5]
-
 
 def main() -> None:
     solver = Solver()

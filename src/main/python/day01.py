@@ -79,9 +79,6 @@ class Solver(AbstractSolver):
             answer += self.line_to_value_part2(line)
         return answer
 
-    def get_day(self) -> str:
-        return os.path.basename(__file__)[3:5]
-
 
 def main() -> None:
     solver = Solver()

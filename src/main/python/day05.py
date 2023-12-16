@@ -9,6 +9,7 @@ from collections import namedtuple
 from functools import cache, reduce
 from itertools import repeat, count
 from typing import Any
+import sys
 
 from src.main.python.util import AbstractSolver
 
@@ -83,8 +84,8 @@ class Solver(AbstractSolver):
         #     map(self.process_seed_list, self.seeds[0::2], self.seeds[1::2]))
         # return min(l)
 
-    def get_day(self) -> str:
-        return os.path.basename(__file__)[3:5]
+    # def get_day(self) -> str:
+    #     return os.path.basename(__file__)[3:5]
 
 
 def main() -> None:

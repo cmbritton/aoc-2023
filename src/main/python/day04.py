@@ -80,9 +80,6 @@ class Solver(AbstractSolver):
 
         return answer
 
-    def get_day(self) -> str:
-        return os.path.basename(__file__)[3:5]
-
 
 def main() -> None:
     sys.setrecursionlimit(1500000)
