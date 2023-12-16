@@ -27,7 +27,8 @@ class Solver(AbstractSolver):
         self.seeds = None
         self.rule_sets = []
 
-    def apply_rule_set(self, rule_set: list[Rule], value: int) -> int:
+    @staticmethod
+    def apply_rule_set(rule_set: list[Rule], value: int) -> int:
         result = value
         for rule in rule_set:
             if rule.src <= value < rule.src + rule.size:
@@ -51,8 +52,7 @@ class Solver(AbstractSolver):
             value += 1
         return result
 
-    def init_data(self, data_file_path: str = None) -> Any:
-        data = self.get_data(self.get_day(), data_file_path)
+    def init_data(self, data: list[str]) -> None:
         rule_set = None
         for line in data:
             line = line.strip()
@@ -71,13 +71,13 @@ class Solver(AbstractSolver):
         if rule_set:
             self.rule_sets.append(rule_set)
 
-        return data
-
-    def solve_part_1(self, data: list[Any]) -> Any:
+    def solve_part_1(self, data: list[str]) -> Any:
+        self.init_data(data)
         return reduce(lambda x, y: min(x, y),
                       map(self.process_seed_list, self.seeds, repeat(1)))
 
     def solve_part_2(self, data: list[Any]) -> Any:
+        self.init_data(data)
         return reduce(lambda x, y: min(x, y),
                       map(self.process_seed_list, self.seeds[0::2],
                           self.seeds[1::2]))
