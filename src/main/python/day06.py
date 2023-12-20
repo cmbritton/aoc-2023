@@ -42,11 +42,17 @@ class Solver(AbstractSolver):
 
     def solve_part_2(self, data: list[Any]) -> Any:
         self.init_data(data)
-        answer = 0
+        start = 0
         for hold_time in range(self.big_race.time + 1):
             if hold_time * (self.big_race.time - hold_time) > self.big_race.dist:
-                answer += 1
-        return answer
+                start = hold_time
+                break
+        end = 0
+        for hold_time in range(self.big_race.time, 0, -1):
+            if hold_time * (self.big_race.time - hold_time) > self.big_race.dist:
+                end = hold_time
+                break
+        return end - start + 1
 
 
 def main() -> None:
