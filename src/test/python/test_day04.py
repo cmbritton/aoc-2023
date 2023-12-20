@@ -31,9 +31,9 @@ def test_part_1():
     assert answer == 17803
 
 
-# def test_part_2():
-#     data_file_path = os.path.join(os.environ.get('RESOURCES_DIR_PATH'),
-#                                   f'day{day}.data')
-#     solver = Solver()
-#     answer = solver.part_2(data_file_path)
-#     assert answer == -1
+def test_part_2():
+    data_file_path = os.path.join(os.environ.get('RESOURCES_DIR_PATH'),
+                                  f'day{day}.data')
+    solver = Solver()
+    answer = solver.part_2(data_file_path)
+    assert answer == 5554894

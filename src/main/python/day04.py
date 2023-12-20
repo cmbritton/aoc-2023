@@ -14,12 +14,13 @@ class Card:
     def __init__(self) -> None:
         super().__init__()
         self.card_id = None
-        self.my_numbers = []
-        self.winning_numbers = []
+        self.my_numbers = None
+        self.winning_numbers = None
+        self.card_count = 1
 
     @staticmethod
-    def make_card(card_id: str, my_numbers: list[int],
-                  winning_numbers: list[int]):
+    def make_card(card_id: str, my_numbers: tuple[int, ...],
+                  winning_numbers: tuple[int, ...]):
         card = Card()
         card.card_id = card_id
         card.my_numbers = my_numbers
@@ -45,11 +46,12 @@ class Solver(AbstractSolver):
             label, rest = line.split(':')
             winning_numbers_str, my_numbers_str = rest.strip().split('|')
             winning_numbers_list = winning_numbers_str.strip().split()
-            winning_numbers = [int(x.strip()) for x in winning_numbers_list]
+            winning_numbers = tuple(
+                    [int(x.strip()) for x in winning_numbers_list])
             my_numbers_list = my_numbers_str.strip().split()
-            my_numbers = [int(x.strip()) for x in my_numbers_list]
+            my_numbers = tuple([int(x.strip()) for x in my_numbers_list])
             self.cards.append(
-                Card.make_card(label, my_numbers, winning_numbers))
+                    Card.make_card(label, my_numbers, winning_numbers))
 
     def add_winnings(self, index: int, winning_count: int) -> int:
         score = 0
@@ -70,13 +72,16 @@ class Solver(AbstractSolver):
 
     def solve_part_2(self, data: list[str]) -> Any:
         self.init_data(data)
-        answer = len(data)
         for index, card in enumerate(self.cards):
             winning_count = card.winning_count()
             if winning_count > 0:
-                answer += self.add_winnings(index, winning_count)
+                for c in self.cards[index + 1:index + winning_count + 1]:
+                    c.card_count += 1 * card.card_count
 
-        return answer
+        total = 0
+        for card in self.cards:
+            total += card.card_count
+        return total
 
 
 def main() -> None:
