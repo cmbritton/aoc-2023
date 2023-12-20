@@ -72,7 +72,7 @@ No answers here! Just elapsed times for each puzzle solution.
 | [Day  2: Cube Conundrum](https://adventofcode.com/2023/2)                  | 968.80 microseconds |   1.07 milliseconds |
 | [Day  3: Gear Ratios](https://adventofcode.com/2023/3)                     |   3.59 milliseconds |  19.29 milliseconds |
 | [Day  4: Scratchcards](https://adventofcode.com/2023/4)                    |   1.62 milliseconds |            Unsolved |
-| [Day  5: If You Give A Seed A Fertilizer](https://adventofcode.com/2023/5) | 605.70 microseconds |            Unsolved |
+| [Day  5: If You Give A Seed A Fertilizer](https://adventofcode.com/2023/5) |   6.34 milliseconds |  95.98 milliseconds |
 | Day  6: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day  7: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day  8: Unavailable                                                        |            Unsolved |            Unsolved |
