@@ -70,9 +70,11 @@ class Hand(object):
 
     def _tie_breaker(self, other: 'Hand') -> int:
         for i in range(5):
-            if Hand.CARDS[self.cards[i]] < Hand.CARDS[other.cards[i]]:
+            if type(self).CARDS[self.cards[i]] < type(self).CARDS[
+                    other.cards[i]]:
                 return -1
-            elif Hand.CARDS[self.cards[i]] > Hand.CARDS[other.cards[i]]:
+            elif type(self).CARDS[self.cards[i]] > type(self).CARDS[
+                    other.cards[i]]:
                 return 1
         return 0
 
@@ -149,14 +151,6 @@ class HandJ(Hand):
             return best_strength
 
         return temp_strength
-
-    def _tie_breaker(self, other: 'Hand') -> int:
-        for i in range(5):
-            if HandJ.CARDS[self.cards[i]] < HandJ.CARDS[other.cards[i]]:
-                return -1
-            elif HandJ.CARDS[self.cards[i]] > HandJ.CARDS[other.cards[i]]:
-                return 1
-        return 0
 
 
 class Solver(AbstractSolver):
