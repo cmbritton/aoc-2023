@@ -39,7 +39,7 @@ class Hand(object):
         super().__init__()
         self.cards = cards
         self.bid = bid
-        self._strength = self._calc_strength()
+        self._strength = self._calc_strength(cards)
 
     def __eq__(self, other: 'Hand'):
         if other is None:
@@ -76,8 +76,9 @@ class Hand(object):
                 return 1
         return 0
 
-    def _calc_strength(self) -> int:
-        c = Counter(self.cards)
+    @staticmethod
+    def _calc_strength(cards: str) -> int:
+        c = Counter(cards)
         counts = list(c.values())
         if 5 in counts:
             return Hand.FIVE_OF_A_KIND
@@ -97,7 +98,7 @@ class Hand(object):
     @property
     def strength(self) -> int:
         if self._strength is None:
-            self._strength = self._calc_strength()
+            self._strength = self._calc_strength(self.cards)
         return self._strength
 
     @strength.setter
@@ -105,27 +106,83 @@ class Hand(object):
         self._strength = value
 
 
+class HandJ(Hand):
+    CARDS = {
+            'J': 1,
+            '2': 2,
+            '3': 3,
+            '4': 4,
+            '5': 5,
+            '6': 6,
+            '7': 7,
+            '8': 8,
+            '9': 9,
+            'T': 10,
+            'Q': 11,
+            'K': 12,
+            'A': 13
+    }
+
+    def __init__(self, cards: str, bid: int) -> None:
+        super().__init__(cards, bid)
+        self.aux_cards = None
+        self.wild_card = None
+
+    def _calc_strength(self, cards: str) -> int:
+        temp_strength = super()._calc_strength(cards)
+        if 'J' not in cards:
+            return temp_strength
+
+        best_cards = None
+        best_strength = Hand.HIGH_CARD
+        for card in HandJ.CARDS.keys():
+            temp_cards = self.cards.replace('J', card)
+            temp_strength = super()._calc_strength(temp_cards)
+            if temp_strength > best_strength:
+                best_cards = temp_cards
+                best_strength = temp_strength
+                self.wild_card = card
+
+        if best_cards is not None:
+            self.aux_cards = best_cards
+            self.strength = best_strength
+            return best_strength
+
+        return temp_strength
+
+    def _tie_breaker(self, other: 'Hand') -> int:
+        for i in range(5):
+            if HandJ.CARDS[self.cards[i]] < HandJ.CARDS[other.cards[i]]:
+                return -1
+            elif HandJ.CARDS[self.cards[i]] > HandJ.CARDS[other.cards[i]]:
+                return 1
+        return 0
+
+
 class Solver(AbstractSolver):
     def __init__(self) -> None:
         super().__init__()
         self.hands = []
 
-    def init_data(self, data: list[str]) -> None:
+    def init_data(self, data: list[str], hand_type) -> None:
         for line in data:
             hand, bid = line.split()
-            self.hands.append(Hand(hand, int(bid)))
+            self.hands.append(hand_type(hand, int(bid)))
         self.hands.sort()
 
-    def solve_part_1(self, data: list[Any]) -> Any:
-        self.init_data(data)
+    def compute_winnings(self) -> int:
         answer = 0
         for index, hand in enumerate(self.hands):
             answer += (hand.bid * (index + 1))
         return answer
 
+    def solve_part_1(self, data: list[Any]) -> Any:
+        self.init_data(data, Hand)
+        return self.compute_winnings()
+
     def solve_part_2(self, data: list[Any]) -> Any:
-        self.init_data(data)
-        return 0
+        self.init_data(data, HandJ)
+        return self.compute_winnings()
 
 
 def main() -> None:

@@ -74,7 +74,7 @@ No answers here! Just elapsed times for each puzzle solution.
 | [Day  4: Scratchcards](https://adventofcode.com/2023/4)                    |   1.65 milliseconds |   1.70 milliseconds |
 | [Day  5: If You Give A Seed A Fertilizer](https://adventofcode.com/2023/5) |   6.34 milliseconds |  95.98 milliseconds |
 | [Day 6: Wait For It](https://adventofcode.com/2023/6)                      |  67.70 microseconds |        1.06 seconds |
-| [Day 7: Camel Cards](https://adventofcode.com/2023/7)                      |   5.18 milliseconds |            Unsolved |
+| [Day 7: Camel Cards](https://adventofcode.com/2023/7)                      |   5.18 milliseconds |  12.03 milliseconds |
 | Day  8: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day  9: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day 10: Unavailable                                                        |            Unsolved |            Unsolved |
