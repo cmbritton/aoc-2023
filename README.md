@@ -75,7 +75,7 @@ No answers here! Just elapsed times for each puzzle solution.
 | [Day  5: If You Give A Seed A Fertilizer](https://adventofcode.com/2023/5) |   6.34 milliseconds |  95.98 milliseconds |
 | [Day 6: Wait For It](https://adventofcode.com/2023/6)                      |  67.70 microseconds |        1.06 seconds |
 | [Day 7: Camel Cards](https://adventofcode.com/2023/7)                      |   5.18 milliseconds |  12.03 milliseconds |
-| [Day 8: Haunted Wasteland](https://adventofcode.com/2023/8)                |   2.09 milliseconds |            Unsolved |
+| [Day 8: Haunted Wasteland](https://adventofcode.com/2023/8)                |   2.09 milliseconds | 154.20 milliseconds |
 | Day  9: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day 10: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day 11: Unavailable                                                        |            Unsolved |            Unsolved |
