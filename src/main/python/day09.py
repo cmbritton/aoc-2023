@@ -40,10 +40,23 @@ class Solver(AbstractSolver):
             seq.append(seq[-1] + value)
         return seq[-1]
 
+    @staticmethod
+    def extrapolate_prev_values(derived_seqs: deque[list[int]]) -> int:
+        seq = derived_seqs.pop()
+        while len(derived_seqs) > 0:
+            value = seq[0]
+            seq = derived_seqs.pop()
+            seq.insert(0, seq[0] - value)
+        return seq[0]
+
     def find_next_value(self, seq: list[int]) -> int:
         return self.extrapolate_next_values(self.regress_seq(seq))
 
+    def find_prev_value(self, seq: list[int]) -> int:
+        return self.extrapolate_prev_values(self.regress_seq(seq))
+
     def init_data(self, data: list[str]) -> None:
+        self.oasis_seqs.clear()
         for line in data:
             self.oasis_seqs.append(list(map(int, line.split())))
 
@@ -57,7 +70,11 @@ class Solver(AbstractSolver):
 
     def solve_part_2(self, data: list[Any]) -> Any:
         self.init_data(data)
-        return 0
+        answer = 0
+        for seq in self.oasis_seqs:
+            answer += self.find_prev_value(seq)
+
+        return answer
 
 
 def main() -> None:
