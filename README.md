@@ -77,7 +77,7 @@ No answers here! Just elapsed times for each puzzle solution.
 | [Day 7: Camel Cards](https://adventofcode.com/2023/7)                      |   5.18 milliseconds |  12.03 milliseconds |
 | [Day 8: Haunted Wasteland](https://adventofcode.com/2023/8)                |   2.09 milliseconds | 154.20 milliseconds |
 | [Day 9: Mirage Maintenance](https://adventofcode.com/2023/9)               |   3.33 milliseconds |   3.26 milliseconds |
-| Day 10: Unavailable                                                        |            Unsolved |            Unsolved |
+| [Day 10: Pipe Maze](https://adventofcode.com/2023/10)                      |  20.77 milliseconds |            Unsolved |
 | Day 11: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day 12: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day 13: Unavailable                                                        |            Unsolved |            Unsolved |
