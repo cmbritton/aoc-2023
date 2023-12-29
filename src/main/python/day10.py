@@ -125,7 +125,7 @@ class Node(object):
 
     def is_vertex(self):
         return (self.is_main_loop() and not self.is_e_w()
-                and not self.is_n_s() and not self.is_start()
+                and not self.is_n_s()
                 and not self.is_ground())
 
 
@@ -177,10 +177,11 @@ class Solver(AbstractSolver):
                     self.get_neighbors(s_neighbor)):
                 node.neighbors.append(s_neighbor)
 
-            w_neighbor = self.grid[node.y][node.x + 1]
-            if (self.get_neighbors(w_neighbor) and node in
-                    self.get_neighbors(w_neighbor)):
-                node.neighbors.append(w_neighbor)
+            e_neighbor = self.grid[node.y][node.x + 1]
+            if (self.get_neighbors(e_neighbor) and node in
+                    self.get_neighbors(e_neighbor)):
+                node.neighbors.append(e_neighbor)
+
         assert len(node.neighbors) == 2
         return node.neighbors
 
@@ -213,6 +214,7 @@ class Solver(AbstractSolver):
         return node.neighbors
 
     def init_data(self, data: list[str]) -> None:
+        self.grid.clear()
         for y in range(len(data)):
             row = []
             for x in range(len(data[y])):
@@ -250,7 +252,7 @@ class Solver(AbstractSolver):
             prev_node = self.grid[src_node.y][x - 1] if x > 0 else None
             if curr_node.is_main_loop():
                 if prev_node.is_main_loop():
-                    if curr_node.is_vertex() or curr_node.is_start():
+                    if curr_node.is_vertex():
                         if prev_vertex is not None:
                             if not curr_node.negates_prev_vertex(prev_vertex):
                                 crossing_count += 1
