@@ -78,7 +78,7 @@ No answers here! Just elapsed times for each puzzle solution.
 | [Day 8: Haunted Wasteland](https://adventofcode.com/2023/8)                |   2.09 milliseconds | 154.20 milliseconds |
 | [Day 9: Mirage Maintenance](https://adventofcode.com/2023/9)               |   3.33 milliseconds |   3.26 milliseconds |
 | [Day 10: Pipe Maze](https://adventofcode.com/2023/10)                      |  23.49 milliseconds |  42.37 milliseconds |
-| Day 11: Unavailable                                                        |            Unsolved |            Unsolved |
+| [Day 11: Cosmic Expansion](https://adventofcode.com/2023/11)               |            Unsolved |            Unsolved |
 | Day 12: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day 13: Unavailable                                                        |            Unsolved |            Unsolved |
 | Day 14: Unavailable                                                        |            Unsolved |            Unsolved |
