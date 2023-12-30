@@ -56,30 +56,30 @@ class AbstractSolver(ABC):
         self.data = None
 
     @abstractmethod
-    def solve_part_1(self, data: Any) -> Any:
+    def solve_part_1(self, data: Any, **kwargs) -> Any:
         pass
 
     @abstractmethod
-    def solve_part_2(self, data: Any) -> Any:
+    def solve_part_2(self, data: Any, **kwargs) -> Any:
         pass
 
     def get_day(self):
         return re.search(r'day(\d\d)', sys.argv[-1]).group(1)
 
-    def part_1(self, data_file_path: str = None) -> Any:
+    def part_1(self, data_file_path: str = None, **kwargs) -> Any:
         timer = Timer()
         answer = self.solve_part_1(
-            self.get_data(self.get_day(), data_file_path))
+            self.get_data(self.get_day(), data_file_path), **kwargs)
         timer.stop()
 
         self.print_info(part='Part 1', timer=timer, answer=answer)
 
         return answer
 
-    def part_2(self, data_file_path: str = None) -> Any:
+    def part_2(self, data_file_path: str = None, **kwargs) -> Any:
         timer = Timer()
         answer = self.solve_part_2(
-            self.get_data(self.get_day(), data_file_path))
+            self.get_data(self.get_day(), data_file_path), **kwargs)
         timer.stop()
 
         self.print_info(part='Part 2', timer=timer, answer=answer)
